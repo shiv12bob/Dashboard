@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js"></script>
+    <style>
+        body {
+            background: linear-gradient(45deg, #fff8f8, #83ea43, #f6f6f6, #83ea43);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .chart-container {
+            width: 45%;
+            border: 6px solid #100101;
+            padding: 20px;
+            text-align: center;
+            margin: 10px;
+            background: white;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            margin: auto;
+            display: block;
+        }
+
+        .download-button {
+            margin-top: 40px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <h1>Output Stock Analysis for Machine 1</h1>
+
+        <div>
+            <h2>Machine 1</h2>
+            <p>Location: Location A</p>
+            <canvas id="machine1Chart" width="400" height="200"></canvas>
+        </div>
+
+        <!-- Add the download button -->
+        <button class="download-button" onclick="downloadPDF('machine1Chart')">Download as PDF</button>
+
+        <!-- Add sorting buttons for Machine 1 -->
+        <button onclick="sortData('machine1Data', 'Grade A')">Sort by Grade A</button>
+        <button onclick="sortData('machine1Data', 'Grade B')">Sort by Grade B</button>
+        <button onclick="sortData('machine1Data', 'Grade C')">Sort by Grade C</button>
+        <button onclick="sortData('machine1Data', 'Total')">Sort by Total</button>
+    </div>
+
+    <div class="chart-container">
+        <h1> Output Stock Analysis for Machine 2 </h1>
+
+        <div>
+            <h2>Machine 2</h2>
+            <p>Location: Location B</p>
+            <canvas id="machine2Chart" width="400" height="200"></canvas>
+        </div>
+
+        <!-- Add the download button -->
+        <button class="download-button" onclick="downloadPDF('machine2Chart')">Download as PDF</button>
+
+        <!-- Add sorting buttons for Machine 2 -->
+        <button onclick="sortData('machine2Data', 'Grade A')">Sort by Grade A</button>
+        <button onclick="sortData('machine2Data', 'Grade B')">Sort by Grade B</button>
+        <button onclick="sortData('machine2Data', 'Grade C')">Sort by Grade C</button>
+        <button onclick="sortData('machine2Data', 'Total')">Sort by Total</button>
+    </div>
+
+    <script>
+        // Function to download PDF
+        function downloadPDF(elementId) {
+            var element = document.getElementById(elementId).parentNode.parentNode;
+            html2pdf(element);
+        }
+
+        // Function to sort data
+        function sortData(dataName, criterion) {
+            var data = window[dataName];
+            if (criterion !== 'Total') {
+                data.datasets[0].data.sort((a, b) => a[data.labels.indexOf(criterion)] - b[data.labels.indexOf(criterion)]);
+            } else {
+                data.datasets[0].data.sort((a, b) => a[data.labels.length - 1] - b[data.labels.length - 1]);
+            }
+            updateChart(dataName);
+        }
+
+        // Function to update chart
+        function updateChart(dataName) {
+            var ctx = document.getElementById(dataName === 'machine1Data' ? 'machine1Chart' : 'machine2Chart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: window[dataName],
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Data for Machine 1 (mock)
+        var machine1Data = {
+            labels: ['2023-06-05', '2023-06-06', '2023-06-07', '2023-06-08', '2023-06-09', '2023-06-10', 'Total'],
+            datasets: [
+                {
+                    label: 'Machine 1',
+                    data: [30, 35, 25, 28, 40, 35, 193], // Mock data, change as needed
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        // Configuration for Machine 1
+        var machine1Config = {
+            type: 'bar',
+            data: machine1Data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Create chart for Machine 1
+        var machine1Ctx = document.getElementById('machine1Chart').getContext('2d');
+        var machine1Chart = new Chart(machine1Ctx, machine1Config);
+
+        // Data for Machine 2 (mock)
+        var machine2Data = {
+            labels: ['2023-06-05', '2023-06-06', '2023-06-07', '2023-06-08', '2023-06-09', '2023-06-10', 'Total'],
+            datasets: [
+                {
+                    label: 'Machine 2',
+                    data: [40, 38, 30, 35, 42, 45, 230], // Mock data, change as needed
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        // Configuration for Machine 2
+        var machine2Config = {
+            type: 'bar',
+            data: machine2Data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Create chart for Machine 2
+        var machine2Ctx = document.getElementById('machine2Chart').getContext('2d');
+        var machine2Chart = new Chart(machine2Ctx, machine2Config);
+    </script>
+</body>
+</html>

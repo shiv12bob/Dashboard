@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Runtime Analysis</title>
+
+    <!-- Load Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- Add your JavaScript code -->
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Machine', 'Target Runtime (mins)', 'Actual Runtime (mins)', 'Variance'],
+                ['Machine 1', 100, 80, 20],
+                ['Machine 2', 120, 110, 10]
+            ]);
+
+            var options = {
+                chart: {
+                    title: 'Machine Runtime Analysis',
+                    subtitle: 'Target vs Actual Runtime with Variance'
+                },
+                bars: 'vertical'
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+
+        function redirectToComponentStatusPage() {
+            // Redirect to another webpage that displays component status
+            window.location.href = 'component_status.html'; // Replace 'component_status.html' with the actual URL of your component status page.
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            margin: 20px 0;
+        }
+
+        #barchart_material {
+            width: 900px;
+            height: 500px;
+            margin: 0 auto;
+        }
+
+        .status-button {
+            font-size: 18px; /* Increase the font size */
+            padding: 15px 30px; /* Make the button slightly larger */
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: absolute;
+            bottom: 10px; /* Adjust the distance from the bottom */
+            right: 10px; /* Adjust the distance from the right */
+        }
+
+        .status-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Navigation Section Styles */
+       /* Navigation Section Styles */
+    .nav-section {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        background-color: #333;
+        padding: 10px;
+        width: 100%;
+        z-index: 1; /* Place it above the content */
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .search-input::placeholder {
+        color: #888;
+    }
+
+    .customer-option {
+        background-color: #0074c1;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 10px;
+        font-size: 16px;
+    }
+
+    .customer-option:hover {
+        background-color: #005a97;
+    }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Section -->
+    <div class="nav-section">
+        <input type="text" class="search-input" placeholder="Search">
+        <button class="customer-option">Customer</button>
+    </div>
+
+    <h1>Machine Runtime Analysis</h1>
+
+    <div id="barchart_material"></div>
+
+    <!-- Add the button to navigate to another webpage -->
+    <a class="status-button" href="component-status.html">View Component Status</a>
+
+</body>
+</html>

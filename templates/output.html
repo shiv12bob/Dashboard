@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output Analysis</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(white, #d3e1d3);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation Menu Bar Styles */
+        .navbar {
+            background-color: rgba(80, 241, 80, 0.69);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            padding: 15px;
+            color: #fff;
+        }
+
+        .navbar a {
+            float: right;
+            display: block;
+            color: #fff;
+            padding: 15px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #2980b9;
+        }
+
+        /* Container Styles */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Table Styles */
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 20px;
+            border: 4px solid linear-gradient(rgba(80, 241, 80, 0.69), rgba(80, 241, 80, 0.69));
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: linear-gradient(rgba(80, 241, 80, 0.69), rgba(80, 241, 80, 0.69));
+            color: #fff;
+            cursor: pointer; /* Add cursor pointer for the sortable header */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Download Excel Button Styles */
+        #download-btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            margin: 20px 0;
+            background: linear-gradient(to bottom, #1d4ca8, #1d4ca8);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #download-btn:hover {
+            background: linear-gradient(to bottom, #1d4ca8, #1d4ca8);
+        }
+
+        /* Output Stock Button Styles */
+        .input-stock-btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            margin-top: 20px;
+            background: linear-gradient(to bottom, #009703, #009703);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .input-stock-btn:hover {
+            background: linear-gradient(to bottom, #45a046, #3f933f);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Output Analysis</h1>
+        <a href="output-stock.html" class="input-stock-btn">Output Stock</a>
+    </div>
+    <div class="container">
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>Inwards Accepted</th>
+                    <th>Minimum Moisture</th>
+                    <th>Max Moisture</th>
+                    <th>Avg Moisture</th>
+                    <th>Rejected in Pre-sorting (kgs)</th>
+                    <th>Net Transferred to Grinder</th>
+                    <th>Final Input to Machine</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2023-06-15</td>
+                    <td>1</td>
+                    <td>1000</td>
+                    <td>8%</td>
+                    <td>12%</td>
+                    <td>10%</td>
+                    <td>50</td>
+                    <td>950</td>
+                    <td>900</td>
+                </tr>
+                <tr>
+                    <td>2023-06-30</td>
+                    <td>2</td>
+                    <td>800</td>
+                    <td>7%</td>
+                    <td>11%</td>
+                    <td>9%</td>
+                    <td>40</td>
+                    <td>760</td>
+                    <td>720</td>
+                </tr><tr>
+                    <td>2023-06-30</td>
+                    <td>2</td>
+                    <td>800</td>
+                    <td>7%</td>
+                    <td>11%</td>
+                    <td>9%</td>
+                    <td>40</td>
+                    <td>760</td>
+                    <td>720</td>
+                </tr><tr>
+                    <td>2023-06-30</td>
+                    <td>2</td>
+                    <td>800</td>
+                    <td>7%</td>
+                    <td>11%</td>
+                    <td>9%</td>
+                    <td>40</td>
+                    <td>760</td>
+                    <td>720</td>
+                </tr><tr>
+                    <td>2023-06-30</td>
+                    <td>2</td>
+                    <td>800</td>
+                    <td>7%</td>
+                    <td>11%</td>
+                    <td>9%</td>
+                    <td>40</td>
+                    <td>760</td>
+                    <td>720</td>
+                </tr><tr>
+                    <td>2023-06-30</td>
+                    <td>2</td>
+                    <td>800</td>
+                    <td>7%</td>
+                    <td>11%</td>
+                    <td>9%</td>
+                    <td>40</td>
+                    <td>760</td>
+                    <td>720</td>
+                </tr><tr>
+                    <td>2023-06-30</td>
+                    <td>2</td>
+                    <td>800</td>
+                    <td>7%</td>
+                    <td>11%</td>
+                    <td>9%</td>
+                    <td>40</td>
+                    <td>760</td>
+                    <td>720</td>
+                </tr><tr>
+                    <td>2023-06-30</td>
+                    <td>2</td>
+                    <td>800</td>
+                    <td>7%</td>
+                    <td>11%</td>
+                    <td>9%</td>
+                    <td>40</td>
+                    <td>760</td>
+                    <td>720</td>
+                </tr><tr>
+                    <td>2023-06-30</td>
+                    <td>2</td>
+                    <td>800</td>
+                    <td>7%</td>
+                    <td>11%</td>
+                    <td>9%</td>
+                    <td>40</td>
+                    <td>760</td>
+                    <td>720</td>
+                </tr><tr>
+                    <td>2023-06-30</td>
+                    <td>2</td>
+                    <td>800</td>
+                    <td>7%</td>
+                    <td>11%</td>
+                    <td>9%</td>
+                    <td>40</td>
+                    <td>760</td>
+                    <td>720</td>
+                </tr>
+                <!-- Add more data rows here -->
+            </tbody>
+        </table>
+
+        <button id="download-btn">Download Excel</button>
+        <div class="loader" id="loader"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.4/xlsx.full.min.js"></script>
+    <script>
+        document.getElementById('download-btn').addEventListener('click', function() {
+            // Show loader during file generation
+            document.getElementById('loader').style.display = 'inline-block';
+            setTimeout(function() {
+                document.getElementById('loader').style.display = 'none';
+            }, 1000); // Assuming it takes 1 second to generate the file
+
+            const data = [
+                ['Date', 'Location', 'Inwards Accepted', 'Minimum Moisture', 'Max Moisture', 'Avg Moisture', 'Rejected in Pre-sorting (kgs)', 'Net Transferred to Grinder', 'Final Input to Machine'],
+                ['2023-06-15', 'New York', 1000, '8%', '12%', '10%', 50, 950, 900],
+                ['2023-06-30', 'Los Angeles', 800, '7%', '11%', '9%', 40, 760, 720],
+                ['2023-06-30', 'Los Angeles', 800, '7%', '11%', '9%', 40, 760, 720],
+                ['2023-06-30', 'Los Angeles', 800, '7%', '11%', '9%', 40, 760, 720],
+                ['2023-06-30', 'Los Angeles', 800, '7%', '11%', '9%', 40, 760, 720],
+                ['2023-06-30', 'Los Angeles', 800, '7%', '11%', '9%', 40, 760, 720],
+                ['2023-06-30', 'Los Angeles', 800, '7%', '11%', '9%', 40, 760, 720],
+                ['2023-06-30', 'Los Angeles', 800, '7%', '11%', '9%', 40, 760, 720],
+                // Add more rows here
+            ];
+
+            const workbook = XLSX.utils.book_new();
+            const sheet = XLSX.utils.aoa_to_sheet(data);
+            XLSX.utils.book_append_sheet(workbook, sheet, 'Sheet1');
+
+            const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+            const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'data.xlsx';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Component Status and Readings</title>
+    <style>
+        body {
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .component {
+            background-color: #e1e1e1;
+            border-radius: 5px;
+            margin: 10px 0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .toggle-button {
+            padding: 5px 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .reading {
+            font-size: 18px;
+        }
+
+        h1 {
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Component Status and Readings</h1>
+
+        <div class="component">
+            <h2>Heater Status</h2>
+            <button class="toggle-button" id="heaterToggle">Turn On</button>
+            <p id="heaterStatus">OFF</p>
+            <p class="reading" id="heaterReading">Temperature: 0°C</p>
+        </div>
+
+        <div class="component">
+            <h2>Chiller Status</h2>
+            <button class="toggle-button" id="chillerToggle">Turn On</button>
+            <p id="chillerStatus">OFF</p>
+            <p class="reading" id="chillerReading">Temperature: 0°C</p>
+        </div>
+
+        <div class="component">
+            <h2>Motor Status</h2>
+            <button class="toggle-button" id="motorToggle">Turn On</button>
+            <p id="motorStatus">OFF</p>
+            <p class="reading" id="motorReading">RPM: 0</p>
+        </div>
+
+        <div class="component">
+            <h2>Power Peak</h2>
+            <p id="powerPeak">Active Energy: 0 kWh</p>
+            <p class="reading" id="powerFactorReading">Power Factor: 0.00</p>
+        </div>
+
+        <div class="component">
+            <h2>Grinder</h2>
+            <button class="toggle-button" id="grinderToggle">Turn On</button>
+            <p id="grinderStatus">OFF</p>
+            <p class="reading" id="grinderReading">Active Power: 0 kW</p>
+        </div>
+
+        <div class="component">
+            <h2>Electrical Data</h2>
+            <p class="reading" id="voltageReading">Voltage: 0 V</p>
+            <p class="reading" id="voltageYBReading">Voltage YB: 0 V</p>
+            <p class="reading" id="voltageBRReading">Voltage BR: 0 V</p>
+            <p class="reading" id="ampereRReading">Ampere R: 0 A</p>
+            <p class="reading" id="ampereYReading">Ampere Y: 0 A</p>
+            <p class="reading" id="ampereBReading">Ampere B: 0 A</p>
+            <p class="reading" id="frequencyReading">Frequency: 0 Hz</p>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle component status
+        function toggleStatus(componentId, statusId) {
+            const toggleButton = document.getElementById(componentId + "Toggle");
+            const statusElement = document.getElementById(statusId);
+
+            toggleButton.addEventListener("click", function () {
+                if (statusElement.innerText === "OFF") {
+                    statusElement.innerText = "ON";
+                    toggleButton.innerText = "Turn Off";
+                } else {
+                    statusElement.innerText = "OFF";
+                    toggleButton.innerText = "Turn On";
+                }
+            });
+        }
+
+        // Update power peak value (simulated)
+        function updatePowerPeak() {
+            const powerPeakElement = document.getElementById("powerPeak");
+            const powerValue = (Math.random() * 100).toFixed(2);
+            powerPeakElement.innerText = `Active Energy: ${powerValue} kWh`;
+
+            const powerFactorElement = document.getElementById("powerFactorReading");
+            const powerFactorValue = (Math.random() * 1).toFixed(2);
+            powerFactorElement.innerText = `Power Factor: ${powerFactorValue}`;
+
+            setTimeout(updatePowerPeak, 5000); // Update every 5 seconds
+        }
+
+        // Function to update component readings (simulated)
+        function updateReading(readingId, unit) {
+            const readingElement = document.getElementById(readingId);
+            const readingValue = (Math.random() * 100).toFixed(2);
+
+            if (unit) {
+                readingElement.innerText = `${unit}: ${readingValue}`;
+            } else {
+                readingElement.innerText = readingValue;
+            }
+
+            setTimeout(() => updateReading(readingId, unit), 3000); // Update every 3 seconds
+        }
+
+        // Initial setup
+        toggleStatus("heater", "heaterStatus");
+        toggleStatus("chiller", "chillerStatus");
+        toggleStatus("motor", "motorStatus");
+        toggleStatus("grinder", "grinderStatus");
+        updatePowerPeak();
+
+        // Start updating readings
+        updateReading("heaterReading", "Temperature");
+        updateReading("chillerReading", "Temperature");
+        updateReading("motorReading", "RPM");
+        updateReading("voltageReading", "Voltage");
+        updateReading("voltageYBReading", "Voltage YB");
+        updateReading("voltageBRReading", "Voltage BR");
+        updateReading("ampereRReading", "Ampere R");
+        updateReading("ampereYReading", "Ampere Y");
+        updateReading("ampereBReading", "Ampere B");
+        updateReading("frequencyReading", "Frequency");
+    </script>
+</body>
+</html>

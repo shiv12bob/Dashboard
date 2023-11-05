@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined HTML Code</title>
+
+    <!-- Load Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- Add your JavaScript code -->
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Date', 'Raw Plastic (Machine 1)', 'Converted Plastic (Machine 1)', 'Raw Plastic (Machine 2)', 'Converted Plastic (Machine 2)'],
+                ['2014', 200, 300, 500, 100],
+                ['2015', 300, 450, 600, 150],
+                ['2016', 150, 200, 300, 100],
+                ['2017', 250, 350, 400, 200]
+            ]);
+
+            var options = {
+                chart: {
+                    title: 'Machine Performance',
+                    subtitle: 'Raw Plastic vs. Converted Plastic by Machine: 2014-2017',
+                },
+                bars: 'horizontal', // Set to 'horizontal' for horizontal bars
+                axes: {
+                    x: {
+                        0: { side: 'top', label: 'Raw Plastic (Machine 1)' }, // Set label position
+                        1: { side: 'top', label: 'Converted Plastic (Machine 1)' },
+                        2: { side: 'bottom', label: 'Raw Plastic (Machine 2)' },
+                        3: { side: 'bottom', label: 'Converted Plastic (Machine 2)' }
+                    }
+                }
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+    </script>
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .chart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Input Stock Analysis</h1>
+
+<div class="chart-container">
+    <div id="barchart_material" style="width: 900px; height: 500px;"></div>
+    <div id="png img"></div>
+</div>
+
+</body>
+</html>
